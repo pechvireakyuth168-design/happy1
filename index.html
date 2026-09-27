@@ -1,0 +1,489 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 10px;
+            background: linear-gradient(
+                135deg, #ffd6e7, #ffeef5, #ffc4dc
+            );
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .container {
+            position: relative;
+            width: 420px;
+            max-width: 100%;
+            min-height: 650px;
+            background: white;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+            padding: 30px 15px 20px;
+        }
+
+        /* Birthday heading */
+
+        .birthday-text {
+            opacity: 0;
+            transform: translateY(-25px);
+            transition: 1s ease;
+            position: relative;
+            z-index: 5;
+        }
+
+        .birthday-text h1 {
+            color: #ff5c93;
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        .birthday-text h2 {
+            color: #555;
+            font-size: 24px;
+        }
+
+        .container.opened .birthday-text {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Gift */
+
+        .gift {
+            position: absolute;
+            left: 50%;
+            top: 235px;
+            transform: translateX(-50%);
+            cursor: pointer;
+            z-index: 20;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            transition: opacity .8s, transform .8s;
+        }
+
+        .gift-box {
+            font-size: 115px;
+            animation: giftBounce 1.2s infinite;
+        }
+
+        .gift p {
+            color: #ff5c93;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: -12px;
+        }
+
+        .gift:hover {
+            transform: translateX(-50%) scale(1.08);
+        }
+
+        .gift:active {
+            transform: translateX(-50%) scale(.95);
+        }
+
+        @keyframes giftBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .container.opened .gift {
+            opacity: 0;
+            transform: translateX(-50%) scale(1.5);
+            pointer-events: none;
+        }
+
+        /* Photos */
+
+        .photos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            margin: 30px auto 0;
+            width: 100%;
+            position: relative;
+            z-index: 3;
+        }
+
+        .photo {
+            width: 31%;
+            height: 155px;
+            object-fit: cover;
+            border: 5px solid white;
+            border-radius: 14px;
+            box-shadow: 0 7px 18px rgba(0,0,0,.2);
+            opacity: 0;
+            transform: translateY(80px) scale(.4);
+        }
+
+        .photo1 {
+            transform-origin: center;
+        }
+
+        .container.opened .photo1 {
+            animation: photo1 1s ease-out .3s forwards;
+        }
+
+        .container.opened .photo2 {
+            animation: photo2 1s ease-out .5s forwards;
+        }
+
+        .container.opened .photo3 {
+            animation: photo3 1s ease-out .7s forwards;
+        }
+
+        @keyframes photo1 {
+            0% {
+                opacity: 0;
+                transform: translateY(80px) rotate(-20deg) scale(.4);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotate(-7deg) scale(1);
+            }
+        }
+
+        @keyframes photo2 {
+            0% {
+                opacity: 0;
+                transform: translateY(80px) scale(.4);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(-10px) rotate(2deg) scale(1);
+            }
+        }
+
+        @keyframes photo3 {
+            0% {
+                opacity: 0;
+                transform: translateY(80px) rotate(20deg) scale(.4);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotate(7deg) scale(1);
+            }
+        }
+
+        /* Birthday wishes */
+
+        .birthday-wish {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease, transform 1s ease;
+            margin: 35px 8px 0;
+            position: relative;
+            z-index: 4;
+        }
+
+        .container.opened .birthday-wish {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 1.4s;
+        }
+
+        .birthday-wish h3 {
+            color: #ff4f8b;
+            font-size: 21px;
+            margin-bottom: 12px;
+        }
+
+        .birthday-wish p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .birthday-wish .love {
+            color: #ff5c93;
+            font-weight: bold;
+            margin-top: 12px;
+        }
+
+        /* Flying money stickers */
+
+        .money-container {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 30;
+        }
+
+        .money-sticker {
+            position: absolute;
+            left: 50%;
+            top: 48%;
+            font-size: 34px;
+            opacity: 0;
+            animation: moneyFly 2.2s ease-out forwards;
+            animation-delay: var(--delay);
+        }
+
+        @keyframes moneyFly {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, 0) scale(.2) rotate(0deg);
+            }
+            15% {
+                opacity: 1;
+            }
+            65% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform:
+                    translate(
+                        calc(-50% + var(--x)),
+                        var(--y)
+                    )
+                    rotate(var(--rotate))
+                    scale(1.3);
+            }
+        }
+
+        /* Little floating hearts */
+
+        .heart {
+            position: absolute;
+            bottom: -30px;
+            animation: heartFloat 4s linear forwards;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes heartFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(.5);
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-650px) scale(1.4);
+            }
+        }
+
+        /* Mobile */
+
+        @media (max-width: 500px) {
+            .container {
+                min-height: 620px;
+                padding: 25px 10px 15px;
+            }
+
+            .birthday-text h1 {
+                font-size: 29px;
+            }
+
+            .birthday-text h2 {
+                font-size: 21px;
+            }
+
+            .gift {
+                top: 220px;
+            }
+
+            .gift-box {
+                font-size: 100px;
+            }
+
+            .photo {
+                height: 125px;
+                border-width: 4px;
+            }
+
+            .birthday-wish {
+                margin-top: 30px;
+            }
+
+            .birthday-wish h3 {
+                font-size: 18px;
+            }
+
+            .birthday-wish p {
+                font-size: 13px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .gift-box {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" id="birthday">
+
+        <!-- Birthday Text -->
+
+        <div class="birthday-text">
+            <h1>Happy Birthday 🎂</h1>
+            <h2>Rynn Cute ❤️</h2>
+        </div>
+
+        <!-- Photos -->
+
+        <div class="photos">
+            <img src="photo1.jpg"
+                 class="photo photo1"
+                 alt="Birthday photo 1">
+
+            <img src="photo2.jpg"
+                 class="photo photo2"
+                 alt="Birthday photo 2">
+
+            <img src="photo3.jpg"
+                 class="photo photo3"
+                 alt="Birthday photo 3">
+        </div>
+
+        <!-- Birthday Wishes -->
+
+        <div class="birthday-wish">
+            <h3>To My Special Girl 💖</h3>
+
+            <p>
+                Wishing you a day filled with love,
+                laughter, and endless happiness! 🌷
+            </p>
+
+            <p>
+                May all your dreams come true,
+                and may your beautiful smile
+                shine brighter every day.
+            </p>
+
+            <p>
+                Thank you for being so special.
+                You deserve all the happiness
+                in the world! 💕
+            </p>
+
+            <p class="love">
+                Happy Birthday, Rynn Cute! 🎀❤️
+            </p>
+        </div>
+
+        <!-- Gift -->
+
+        <button class="gift" id="giftButton"
+                onclick="openGift()"
+                aria-label="Open your birthday gift">
+            <div class="gift-box">🎁</div>
+            <p>Click Me 🎀</p>
+        </button>
+
+        <!-- Flying Money -->
+
+        <div class="money-container"
+             id="moneyContainer"></div>
+
+    </div>
+
+    <script>
+        function openGift() {
+            const container =
+                document.getElementById("birthday");
+
+            const giftButton =
+                document.getElementById("giftButton");
+
+            if (container.classList.contains("opened")) {
+                return;
+            }
+
+            // Open the gift and show the birthday message
+            container.classList.add("opened");
+            giftButton.disabled = true;
+
+            // Flying money stickers
+            const moneyContainer =
+                document.getElementById("moneyContainer");
+
+            const moneyEmojis = [
+                "💵", "💸", "💰", "🤑", "💴"
+            ];
+
+            for (let i = 0; i < 24; i++) {
+                const money = document.createElement("span");
+
+                money.className = "money-sticker";
+
+                money.textContent =
+                    moneyEmojis[
+                        Math.floor(Math.random() * moneyEmojis.length)
+                    ];
+
+                const x = Math.random() * 360 - 180;
+                const y = Math.random() * -400 - 80;
+                const rotate = Math.random() * 720 - 360;
+                const delay = Math.random() * 0.5;
+
+                money.style.setProperty("--x", x + "px");
+                money.style.setProperty("--y", y + "px");
+                money.style.setProperty("--rotate", rotate + "deg");
+                money.style.setProperty("--delay", delay + "s");
+
+                moneyContainer.appendChild(money);
+
+                setTimeout(() => {
+                    money.remove();
+                }, 3000);
+            }
+
+            // Floating hearts
+            for (let i = 0; i < 18; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement("span");
+
+                    heart.className = "heart";
+                    heart.textContent = ["💗", "💕", "💖", "❤️"][
+                        Math.floor(Math.random() * 4)
+                    ];
+
+                    heart.style.left =
+                        Math.random() * 100 + "%";
+
+                    heart.style.animationDuration =
+                        (3 + Math.random() * 2) + "s";
+
+                    container.appendChild(heart);
+
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 5500);
+                }, i * 180);
+            }
+        }
+    </script>
+
+</body>
+</html>
